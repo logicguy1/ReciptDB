@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <link rel="stylesheet" href="/static/css/index.css">
+  <div class="header"></div>
+  <form action="" method="post" novalidate enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <p>
+      {{ form.store(size=32, placeholder="Store Name") }}
+      {% for error in form.store.errors %}
+      <br><span class="err">*{{ error }}</span>
+      {% endfor %}
+    </p>
+    <p>
+      {{ form.image.label }}
+      {{ form.image() }}
+      {% for error in form.image.errors %}
+      <br><span class="err">*{{ error }}</span>
+      {% endfor %}
+    </p>
+    <p>
+      {{ form.total.label }}
+      {{ form.total() }}
+      {% for error in form.total.errors %}
+      <br><span class="err">*{{ error }}</span>
+      {% endfor %}
+    </p>
+    <p>
+      {{ form.tags.label }}
+      {{ form.tags() }}
+      {% for error in form.tags.errors %}
+      <br><span class="err">*{{ error }}</span>
+      {% endfor %}
+    </p>
+    <p>{{ form.submit() }}</p>
+  </form>
+
+{% endblock %}

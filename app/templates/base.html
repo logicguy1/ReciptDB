@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+    <head>
+      <link rel="stylesheet" href="/static/css/base.css">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+      {% if title %}
+      <title>{{ title }} - ReciptDB</title>
+      {% else %}
+      <title>Welcome to ReciptDB</title>
+      {% endif %}
+    </head>
+    <body>
+        <div id="navbar">
+          <a href="{{ url_for('dashboard.index') }}">ReciptDB</a> 
+          <div id="wrapper">
+            {% if current_user.is_anonymous %}
+              <a href="{{ url_for('auth.login') }}">Login</a>
+            {% else %}
+              {% if current_user.is_admin() %}
+              {% endif %}
+              <a href="{{ url_for('auth.logout') }}">Logout</a>
+            {% endif %}
+          </div>
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="notifcation {{ 'info' if messages[0].startswith('info') else 'error' }}">
+              {% if messages[0].startswith('info') %}
+                <h3>Information</h3>
+                {% for message in messages %}
+                  <p>{{ message[4:] }}</p>
+                {% endfor %}
+              {% else %}
+                <h3>Error!</h3>
+                {% for message in messages %}
+                  <p>{{ message }}</p>
+                {% endfor %}
+              {% endif%}
+              <img id="close-err" src="/static/img/x_icon.svg" alt="close">
+            </div>
+          {% endif %}
+        {% endwith %}
+        <div id="sidebar">
+          <a href="{{ url_for('dashboard.index') }}">Bonner</a>
+          <a href="{{ url_for('tags.index') }}">Tags</a>
+        </div>
+        <div id="main">
+          {% block content %}{% endblock %}
+        </div>
+      <script src="/static/js/base.js"></script>
+    </body>
+</html>

@@ -1,0 +1,65 @@
+img {
+  display: block;
+  max-width: 40vw;
+  max-height: 74vh;
+  width: auto;
+  height: auto;
+}
+
+#left {
+  flex-grow: 1;
+  overflow: auto;
+  padding-bottom: 50px;
+}
+
+#recipt {
+/*  position: absolute;
+  top: 80px;
+  right: 100px;*/
+  border-radius: 7px;
+
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+h1 {
+  padding-bottom: 15px;
+}
+
+#stamp {
+  padding-bottom: 15px;
+}
+
+#store-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#top {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+#date-select {
+  width: 120px;
+  text-align: right;
+}
+
+#price {
+  width: 120px;
+}
+
+#contols {
+  display: flex;
+  position: absolute;
+  align-items: center;
+
+  left: 100px;
+  margin-top: -50px;
+}
+
+#submit-btn {
+  margin-right: 30px;
+}

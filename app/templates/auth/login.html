@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <link rel="stylesheet" href="/static/css/auth.css">
+    <div id="card">
+      <div id="header">
+        <span>SIGN IN</span>
+        <a href="/help">Need help?</a>
+      </div>
+      <form action="" method="post" novalidate>
+          {{ form.hidden_tag() }}
+          <p>
+              {{ form.email(size=32, placeholder="Email") }}
+              {% for error in form.email.errors %}
+              <br><span class="err">*{{ error }}</span>
+              {% endfor %}
+          </p>
+          <p>
+              {{ form.password(size=32, placeholder="Password") }}
+              {% for error in form.password.errors %}
+              <br><span class="err">*{{ error }}</span>
+              {% endfor %}
+          </p>
+          <p>{{ form.submit() }}</p>
+      </form>
+      <p id="new-user">New User? <a href="{{ url_for('auth.register') }}">Click to Register!</a></p>
+    </div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <link rel="stylesheet" href="/static/css/view.css">
+  <div class="header"></div>
+  
+  <form action="" method="post" novalidate enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div id="top">
+      <div id="left">
+        <div id="store-head">
+          <h1>{{ recipt.store }}</h1>
+          {{ form.timestamp(placeholder="MM/DD/YY HH:MM:SS", id="date-select") }}
+          {% for error in form.timestamp.errors %}
+            <br><span class="err">*{{ error }}</span>
+          {% endfor %}
+        </div>
+          
+        <div id="OCROUT">
+          {{ form.body(placeholder="Contents of the recipt", spellcheck="false") }}
+          {% for error in form.body.errors %}
+            <br><span class="err">*{{ error }}</span>
+          {% endfor %}
+        </div>
+        <br>
+        <p>Brugerdefineret total: {{ form.total(placeholder="Total price", id="price") }}</p>
+      </div>
+      <img id="recipt" src="{{ url_for('dashboard.img', id=recipt.id, cool=0) }}" alt="Image of recipt">
+    </div>
+
+    <div id="contols">
+      {{ form.submit(id="submit-btn") }}
+      <a id="back-link" href="{{ url_for('dashboard.index') }}">Tilbage til forsiden</a>
+    </div>
+  </form>
+
+{% endblock %}

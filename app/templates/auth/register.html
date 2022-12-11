@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <link rel="stylesheet" href="/static/css/auth.css">
+    <div id="card">
+      <div id="header">
+        <span>SIGN UP</span>
+        <a href="/help">Need help?</a>
+      </div>
+      <form action="" method="post">
+          {{ form.hidden_tag() }}
+          <p>
+              {{ form.email(size=32, placeholder="Email") }}
+              {% for error in form.email.errors %}
+              <br><span class="err">*{{ error }}</span>
+              {% endfor %}
+          </p>
+          <p>
+              {{ form.password(size=32, placeholder="Password", onChange="pass_change();") }}
+              {% for error in form.password.errors %}
+              <br><span class="err">*{{ error }}</span>
+              {% endfor %}
+              <div id="strength-wrapper">
+                <div id="level-0"></div>
+                <div id="level-1"></div>
+                <div id="level-2"></div>
+                <div id="level-3"></div>
+                <div id="level-4"></div>
+              </div>
+          </p>
+          <p>
+              {{ form.password2(size=32, placeholder="Repeat Password") }}
+              {% for error in form.password2.errors %}
+              <br><span class="err">*{{ error }}</span>
+              {% endfor %}
+          </p>
+          <p>{{ form.submit() }}</p>
+      </form>
+    </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
+  <script src="/static/js/register.js"></script>
+{% endblock %}

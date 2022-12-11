@@ -1,0 +1,119 @@
+#card {
+  position: absolute;
+
+  padding: 30px;
+  padding-top: 100px;
+
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 6px;
+
+  color: #202020;
+}
+
+#card #header {
+  position: absolute;
+  margin-bottom: 20px;
+
+  display: flex;
+  justify-content: space-between;
+
+  top: 0;
+  left: 0;
+
+  width: calc(100% - 60px);
+  height: 70px;
+
+  line-height: 70px;
+  padding-left: 30px;
+  padding-right: 30px;
+
+  box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75);
+  /*border-bottom: 4px solid #202020; */
+}
+
+#card #header span {
+  font-weight: bold;
+}
+
+#card #header a {
+  color: #bbb;
+  font-size: 14px;
+}
+
+/* Input styles */
+#card input[type=password], #card input[type=text] {
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  background-size: 20px;
+
+  padding: 12px 40px;
+  margin: 8px 0;
+
+  border: 1px solid #eee;
+  border-radius: 2px;
+  outline: none;
+}
+
+#card input[type=text] {
+  background-image: url('/static/img/user_icon.svg');
+}
+
+#card input[type=password] {
+  background-image: url('/static/img/lock_security_icon.svg');
+}
+
+#card input[type=text]:focus, #card input[type=password]:focus {
+  border: 1px solid #ccc;
+}
+
+#card #submit {
+  width: 100%;
+  height: 50px;
+  font-size: 15px;
+  font-weight: bold;
+
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  background-color: #fff;
+  border: 1px solid #eee;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 2px;
+  transition: .2s;
+
+  cursor: pointer;
+}
+
+#card #submit:hover {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+/* New user style */
+#new-user {
+  padding-top: 5px;
+  
+  text-align: center;
+  font-size: 13;
+  color: #bbb;
+}
+
+/* Password indicator */
+#strength-wrapper {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+}
+
+#strength-wrapper div {
+  width: calc(21% - 10px);
+  height: 5px;
+  background-color: #ddd;
+  border-radius: 5px;
+  transition: all 500ms ease;
+}
+
+

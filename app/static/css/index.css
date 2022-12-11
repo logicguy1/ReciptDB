@@ -1,0 +1,37 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+
+th {
+  letter-spacing: 2px;
+}
+
+td {
+  letter-spacing: 1px;
+}
+
+tbody td, thead th {
+  text-align: left;
+}
+
+tbody td {
+  cursor: pointer;
+}
+
+td, th {
+  padding: 5px;
+}
+
+tbody tr:nth-child(2n) {
+  background-color: #eee;
+}
+
+td, th {
+  border-bottom: 1px solid #aaa;
+}
+
+#trash {
+  width: 17px;
+}

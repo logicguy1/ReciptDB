@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <link rel="stylesheet" href="/static/css/index.css">
+  <div class="header"></div>
+  <table>
+    <thead>
+      <tr>
+        <th>Tidspunkt</th>
+        <th>Butik</th>
+        <th>Pris</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for recipt in recipts %}
+        <tr onclick="open_new('{{ recipt.id }}');">
+          <td>{{ recipt.timestamp }}</td>
+          <td>{{ recipt.store }}</td>
+          <td>{{ recipt.total }}</td>
+          <td><a href="{{ url_for('dashboard.delete', id=recipt.id) }}"><img id="trash" src="static/img/trash_2_icon.svg" alt="Delete"></a></td>
+        </tr> 
+      {% endfor %}
+    </tbody>
+  </table>  
+
+  <a href="{{ url_for('dashboard.add') }}">Upload new recipt</a>
+
+  <script src="/static/js/main.js"></script>
+{% endblock %}
