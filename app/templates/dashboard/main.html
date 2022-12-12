@@ -3,12 +3,21 @@
 {% block content %}
   <link rel="stylesheet" href="/static/css/index.css">
   <div class="header"></div>
+
+  
+  <form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    {{ form.search(size=32, placeholder="Søg efter en bon", id="search") }}
+    {{ form.submit() }}
+  </form>
+
   <table>
     <thead>
       <tr>
         <th>Tidspunkt</th>
         <th>Butik</th>
         <th>Pris</th>
+        <th>Tags</th>
         <th></th>
       </tr>
     </thead>
@@ -18,13 +27,22 @@
           <td>{{ recipt.timestamp }}</td>
           <td>{{ recipt.store }}</td>
           <td>{{ recipt.total }}</td>
-          <td><a href="{{ url_for('dashboard.delete', id=recipt.id) }}"><img id="trash" src="static/img/trash_2_icon.svg" alt="Delete"></a></td>
+          <td>
+            <div id="tag-list">
+              {% for tag in recipt.get_tags() %}
+                <div class="tag-small" style="background-color: #{{ tag.color }}40; border: 1.5px solid #{{ tag.color }}70;">
+                  <span>{{tag.body}}</span>
+                </div>
+              {% endfor %}
+            </div>
+          </td> 
+          <td><a href="{{ url_for('dashboard.delete', id=recipt.id) }}"><img id="trash" src="static/img/gray/trash_2_icon.svg" alt="Delete"></a></td>
         </tr> 
       {% endfor %}
     </tbody>
   </table>  
 
-  <a href="{{ url_for('dashboard.add') }}">Upload new recipt</a>
+  <a href="{{ url_for('dashboard.add') }}">Upload ny bon</a>
 
   <script src="/static/js/main.js"></script>
 {% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <link rel="stylesheet" href="/static/css/admin.css">
+
+  <form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    {{ form.code(size=32, placeholder="Tilføj en kode", id="search") }}
+    {{ form.submit() }}
+  </form>
+  <h2>Invitations koder</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Kode</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for code in codes %}
+        <tr>
+          <td>{{ code.code }}</td>
+          <td>{{ code.used }}</td>
+          <td><a href="{{ url_for('dashboard.delete', id=code.id) }}"><img id="trash" src="/static/img/gray/trash_2_icon.svg" alt="Delete"></a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

@@ -59,11 +59,11 @@
 }
 
 #card input[type=text] {
-  background-image: url('/static/img/user_icon.svg');
+  background-image: url('/static/img/gray/user_icon.svg');
 }
 
 #card input[type=password] {
-  background-image: url('/static/img/lock_security_icon.svg');
+  background-image: url('/static/img/gray/lock_security_icon.svg');
 }
 
 #card input[type=text]:focus, #card input[type=password]:focus {

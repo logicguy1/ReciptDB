@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <link rel="stylesheet" href="/static/css/tags.css">
+  <div class="header"></div>
+ 
+  <h2>Dine tags</h2>
+  <div id="tag-card-wrapper">
+    {% for tag, uses in tags %}
+    <div class="tag-card" style="border-left: 5px solid #{{ tag.color }}70;">
+      <h3>{{tag.body}}</h3>
+      <p>Kvitteringer: {{ uses }}</p>
+      <p>Farvekode: <span class="color">#{{ tag.color }}</span></p>
+      <a href="?rem={{ tag.id }}">Fjærn</a>
+    </div>
+    {% endfor %}
+  </div>
+  <br>
+  <a href="{{ url_for('tags.create') }}">Lav nyt tag</a>
+{% endblock %}

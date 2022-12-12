@@ -20,10 +20,10 @@ a {
 /* Navbar style */
 #navbar {
   height: 50px;
-  width: calc(100% - 200px);
+  width: calc(100% - 90px);
   line-height: 50px;
-  padding-right: 100px;
-  padding-left: 100px;
+  padding-right: 45px;
+  padding-left: 45px;
 
   background-color: #202020;
 
@@ -97,8 +97,8 @@ a {
 
 /* Content styles */
 #main {
-  padding-left: 100px;
-  padding-right: 100px;
+  padding-left: 220px;
+  padding-right: 45px;
 }
 
 /* Input styles */
@@ -169,13 +169,97 @@ select {
 
 /* Sidebar css */
 #sidebar {
-  position: absolute;
+  width: 175px;
+  height: calc(100% - 60px);
+
+  position: fixed;
   left: 0;
   top: 50px;
 
-  background-color: #202020;
-  width: 100px;
-  height: 100%;
+  padding-top: 10px;
 
+  background-color: #2b2a2a;
 }
 
+#sidebar a {
+  display: flex;
+  gap: 10px;
+
+  padding-left: 15px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+
+  align-items: center;
+  width: 150px;
+}
+
+#sidebar a:hover {
+  background-color: #353535;
+  border-radius: 0 3px 3px 0;
+}
+
+#sidebar * {
+  color: #eee;
+}
+
+/* Tags */
+#tag-wrapper {
+  width: 100%;
+  min-height: 39px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  
+  flex-grow: 1;
+  flex-wrap: wrap;
+}
+
+#tag-wrapper .add_img {
+  height: 23px;
+  cursor: pointer;
+}
+
+.tag {
+  min-width: 120px;
+  height: 17px;
+  font-size: 13px;
+
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  display: flex;
+  justify-content: space-between;
+  border-radius: 100px;
+}
+
+.tag img {
+  cursor: pointer;
+  height: 17px;
+}
+
+#tag-list {
+  display: flex;
+  gap: 10px;
+  max-width: 400px;
+}
+
+.tag-small {
+  min-width: 70px;
+  height: 17px;
+  font-size: 10px;
+
+  padding-top: 10px;
+  padding-bottom: 6px;
+  padding-left: 20px;
+  padding-right: 10px;
+
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  border-radius: 100px;
+
+}

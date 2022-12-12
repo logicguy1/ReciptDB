@@ -43,7 +43,7 @@ h1 {
 }
 
 #date-select {
-  width: 120px;
+  width: 180px;
   text-align: right;
 }
 
@@ -56,10 +56,38 @@ h1 {
   position: absolute;
   align-items: center;
 
-  left: 100px;
+  left: 220px;
   margin-top: -50px;
 }
 
 #submit-btn {
   margin-right: 30px;
 }
+
+/* Dropdown menu */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+#dropdown {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+/* Links inside the dropdown */
+#dropdown a {
+  color: black;
+  padding: 12px 16px;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block !important;} 

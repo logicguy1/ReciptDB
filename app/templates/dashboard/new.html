@@ -12,15 +12,15 @@
       {% endfor %}
     </p>
     <p>
-      {{ form.image.label }}
-      {{ form.image() }}
+      {{ form.image.label }}<br>
+      {{ form.image(class="custom-file-input") }}
       {% for error in form.image.errors %}
       <br><span class="err">*{{ error }}</span>
       {% endfor %}
     </p>
     <p>
-      {{ form.total.label }}
-      {{ form.total() }}
+      {{ form.total.label }}<br>
+      {{ form.total(placeholder="Den endelige pris på din bon") }}
       {% for error in form.total.errors %}
       <br><span class="err">*{{ error }}</span>
       {% endfor %}

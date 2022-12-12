@@ -15,16 +15,22 @@ migrate = Migrate(app, db)
 login = LoginManager(app)
 login.login_view = 'auth.login'
 
-from app.auth import bp as auth_bp
+from app.bps.auth import bp as auth_bp
 app.register_blueprint(auth_bp, url_prefix="/auth")
 
-from app.tags import bp as tags_bp
-app.register_blueprint(tags_bp)
+from app.bps.tags import bp as tags_bp
+app.register_blueprint(tags_bp, url_prefix="/tags")
 
-from app.api import bp as api_bp
+from app.bps.api import bp as api_bp
 app.register_blueprint(api_bp, url_prefix="/api")
 
-from app.dashboard import bp as dash_bp
+from app.bps.dashboard import bp as dash_bp
 app.register_blueprint(dash_bp)
+
+from app.bps.stats import bp as stats_bp
+app.register_blueprint(stats_bp, url_prefix="/stats")
+
+from app.bps.admin import bp as admin_bp
+app.register_blueprint(admin_bp, url_prefix="/admin")
 
 from app import models

@@ -15,6 +15,24 @@
             <br><span class="err">*{{ error }}</span>
           {% endfor %}
         </div>
+
+        <p style="font-size: 13px;"><i>Tags</i></p>
+        <div id="tag-wrapper">
+          {% for usr_tag, tag in tags %}
+          <div class="tag" style="background-color: #{{ usr_tag.color }}40; border: 1.5px solid #{{ usr_tag.color }}70;">
+            <span>{{usr_tag.body}}</span>
+            <a href="?id={{ recipt.id }}&rem_tag={{ tag.id }}"><img src="/static/img/black/x_icon.svg" alt="x"></a>
+          </div>
+          {% endfor %}
+          <div class="dropdown">
+            <img class="add_img" onClick="open_dropdown();" src="/static/img/black/plus_add_icon.svg" alt="x">
+            <div id="dropdown" class="dropdown-content">
+              {% for tag in all_tags %}
+                <a href="?id={{ recipt.id }}&add_tag={{ tag.id }}">{{ tag.body }}</a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
           
         <div id="OCROUT">
           {{ form.body(placeholder="Contents of the recipt", spellcheck="false") }}
@@ -34,4 +52,5 @@
     </div>
   </form>
 
+  <script src="/static/js/view.js"></script>
 {% endblock %}

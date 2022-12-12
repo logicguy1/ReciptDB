@@ -1,0 +1,172 @@
+h2 {
+  margin-bottom: 15px;
+}
+
+/* Form Style */
+#tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  margin-bottom: 15px;
+}
+
+#tags li {
+  content: "";
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+}
+
+ul li label {
+  cursor: pointer;
+  padding-left: 10px;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+	-webkit-appearance: none;
+	background-color: #fafafa;
+	border: 1px solid #cacece;
+	padding: 9px;
+	border-radius: 3px;
+	display: inline-block;
+	position: relative;
+
+  cursor: pointer;
+  background-position: 2px 2px;
+  background-repeat: no-repeat;
+  background-size: 14px;
+  background-image: url('/static/img/gray/x_icon.svg');
+}
+
+input[type="checkbox"]:checked {
+  background-image: none;
+}
+
+/* Card syle */
+#tag-card-wrapper {
+  padding-top: 20px;
+  display: flex; 
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 35px;
+}
+
+.card {
+  min-width: 200px;
+  max-width: 400px;
+  min-height: 100px;
+  position: relative;
+  flex: 1;
+
+  padding: 20px;
+  padding-right: 25px;
+
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-left: 5px solid #9000ff;
+}
+
+.card h3 {
+  padding-bottom: 10px;
+}
+
+/* Chart style */
+#pillars {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  height: 100px;
+  width: 250px;
+}
+
+.pillar-wrapper {
+  display: flex;
+  align-items: end;
+
+  height: 100px;
+  background-color: #eee;
+  border-radius: 10px;
+
+  overflow: hidden;
+	background-clip: padding-box;
+
+  position: relative;
+  /*display: inline-block;*/
+  border: 4px solid #fff;
+}
+
+.pillar {
+  border-radius: 10px;
+}
+
+.tooltip {
+  visibility: hidden;
+  width: 120px;
+  background-color: #252525;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  opacity: 0;
+  transition: opacity .3s;
+
+  /* Position the tooltip */
+  position: fixed;
+  z-index: 10;
+  transform: translate(calc(-50% + 5px), calc(100% + 9px));
+}
+
+.pillar-wrapper:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tooltip::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%; /* At the bottom of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #252525 transparent;
+}
+
+/* Table style */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+
+th {
+  letter-spacing: 2px;
+}
+
+td {
+  letter-spacing: 1px;
+}
+
+tbody td, thead th {
+  text-align: left;
+}
+
+td, th {
+  padding: 5px;
+}
+
+tbody tr:nth-child(2n) {
+  background-color: #f5f5f5;
+}
+
+td, th {
+  border-bottom: 1px solid #aaa;
+}
+
+td img {
+  float: right;
+  padding-right: 10px;
+}

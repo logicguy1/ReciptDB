@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <link rel="stylesheet" href="/static/css/tags.css">
+  <div class="header"></div>
+  <form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <p>
+      {{ form.name(size=32, placeholder="Tag navn") }}
+      {% for error in form.name.errors %}
+      <br><span class="err">*{{ error }}</span>
+      {% endfor %}
+    </p>
+    <p>
+      <p id="color-title">Forslagen farvekoder</p>
+      <div id="pallete">
+        {% for color in ["9900d8", "3056ff", "20ff90", "30d9f4", "d050ff", "50ee10"] %}
+          <div class="color-name">
+            <span class="color"># {{ color }}</span>
+            <div class="exam-color" style="background-color: #{{ color }}40; border: 1.5px solid #{{ color }}70;"></div>
+          </div>
+        {% endfor %}
+      </div>
+      <div id="color-inp-wrapper">
+        {{ form.color(id="color-inp", size=10, placeholder="Tag'ets farve") }}
+        <div class="exam-color" style="background-color: #40404040; border: 1.5px solid #40404070;"></div>
+      </div>
+      {% for error in form.color.errors %}
+      <br><span class="err">*{{ error }}</span>
+      {% endfor %}
+    </p>
+    <p>{{ form.submit() }}</p>
+  </form>
+
+  <script src="/static/js/tag.js"></script>
+{% endblock %}

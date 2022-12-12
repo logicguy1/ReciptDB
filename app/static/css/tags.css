@@ -1,0 +1,79 @@
+h2, h3 {
+  padding-bottom: 10px;
+}
+
+.tag-card a {
+  position: absolute;
+  bottom: 10px;
+}
+
+#tag-card-wrapper {
+  display: flex; 
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 35px;
+}
+
+.tag-card {
+  min-width: 200px;
+  max-width: 400px;
+  height: 100px;
+  position: relative;
+  flex: 1;
+
+  padding: 10px;
+  padding-right: 15px;
+
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.tag-card h3 {
+  width: 100%;
+}
+
+.color {
+  letter-spacing: 1px;
+  background-color: #eee;
+  border-radius: 3px;
+}
+
+/* Add new styles */
+#pallete {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 350px;
+}
+
+.color-name {
+  display: flex;
+  justify-content: space-between;
+  width: 120px;
+  align-items: center;
+  margin-bottom: 2px;
+  margin-right: 15px;
+}
+
+.exam-color {
+  height: 13px;
+  width: 30px;
+  border-radius: 10px;
+}
+
+#color-inp {
+  width: 200px;
+}
+
+#color-inp-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+#color-inp-wrapper .exam-color {
+  margin-left: -45px;
+  margin-top: 3px;
+}
+
+#color-title {
+  margin-bottom: 5px;
+}

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <link rel="stylesheet" href="/static/css/stats.css">
+    <h2>Viser statestik for</h2>
+    <form action="" method="post" novalidate>
+      {{ form.hidden_tag() }}
+      <p>
+          {{ form.tags(size=32, placeholder="Email") }}
+          {% for error in form.tags.errors %}
+          <br><span class="err">*{{ error }}</span>
+          {% endfor %}
+      </p>
+      <p>{{ form.submit() }}</p>
+    </form>
+    <div id="tag-card-wrapper">
+
+      <div class="card">
+        <h3>Du har i denne måned brugt for {{ total[0][1] }}Kr</h3>
+        {% with diff = total[0][1] - total[1][1] %}
+        <p>Det er {{ str(round(diff, 2)).replace("-", "") }} {{ "mindre" if diff < 0 else "mere" }} end sidste måned</p>
+        {% endwith %}
+      </div>
+
+      <div class="card">
+        <h3>Din udvikling gennem det seneste år</h3>
+        <div id="pillars">
+          {% for tot in total[:12][::-1] %}
+            <div class="pillar-wrapper">
+              <div class="pillar" style="width: 10px; height: {{ max(0.1, max(0.01, tot[1]) / max(1, higest) * 100) }}%; background-color: #9000ff;">
+              </div>
+              <div class="tooltip">{{ round(tot[1], 2) }}kr <br> {{ tot[0] }}</div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Byget fordelt på kategorier</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Tag</th>
+              <th>Total</th>
+              <th>Avg (3M)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for tag, tot in tags_total.items() %}
+              <tr>
+                <td>{{ tag.body }}</td>
+                <td>{{ round(tot, 2) }}</td>
+                <td>{{ round(tags_avg.get(tag), 2) }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+{% endblock %}

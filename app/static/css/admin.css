@@ -1,0 +1,73 @@
+/* Input styles */
+input[type=text] {
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  width: calc(100% - 161px);
+  padding: 12px 18px;
+  width: 265px;
+
+  margin: 8px 0;
+
+  border: 1px solid #eee;
+  border-radius: 2px;
+  outline: none;
+}
+
+#search {
+  background-image: url('/static/img/gray/key_icon.svg');
+  padding: 12px 40px;
+  padding-right: 12px;
+}
+
+input[type=text]:focus {
+  border: 1px solid #ccc;
+}
+
+#submit {
+  height: 43px;
+  width: 75px;
+  box-shadow: none;
+  transition: all 10ms ease;
+}
+
+#submit:hover {
+  box-shadow: none;
+  border: 1px solid #ccc;
+}
+
+/* table style */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+
+th {
+  letter-spacing: 2px;
+}
+
+td {
+  letter-spacing: 1px;
+}
+
+tbody td, thead th {
+  text-align: left;
+}
+
+td, th {
+  padding: 5px;
+}
+
+tbody tr:nth-child(2n) {
+  background-color: #f5f5f5;
+}
+
+td, th {
+  border-bottom: 1px solid #aaa;
+}
+
+td img {
+  float: right;
+  padding-right: 10px;
+}
