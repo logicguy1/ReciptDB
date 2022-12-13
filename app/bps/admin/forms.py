@@ -11,3 +11,7 @@ class CreateInviteForm(FlaskForm):
     submit = SubmitField("Tilføj")
 
 
+class SetInviteForm(FlaskForm):
+    code = StringField("")
+    activate = BooleanField("")
+    submit = SubmitField("")

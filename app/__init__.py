@@ -1,10 +1,10 @@
-from flask import Flask
+from flask import Flask, request, abort
 
 from app.config import Config
 
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user, login_user, logout_user, login_required
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -14,6 +14,14 @@ migrate = Migrate(app, db)
 
 login = LoginManager(app)
 login.login_view = 'auth.login'
+
+
+@app.before_request
+def before_request_func():
+    if request.endpoint != "static" and not current_user.is_anonymous:
+        if current_user.code.first().status != 1:
+            logout_user()
+
 
 from app.bps.auth import bp as auth_bp
 app.register_blueprint(auth_bp, url_prefix="/auth")

@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: f6a76200c12a
+Revision ID: 8eb932257659
 Revises: 
-Create Date: 2022-12-10 14:30:24.282245
+Create Date: 2022-12-13 08:02:52.236732
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'f6a76200c12a'
+revision = '8eb932257659'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -28,18 +28,28 @@ def upgrade():
     with op.batch_alter_table('user', schema=None) as batch_op:
         batch_op.create_index(batch_op.f('ix_user_email'), ['email'], unique=True)
 
+    op.create_table('invite',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('code', sa.String(length=100), nullable=True),
+    sa.Column('satus', sa.Integer(), nullable=True),
+    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
     op.create_table('recipt',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('store', sa.String(length=128), nullable=True),
     sa.Column('body', sa.String(length=4000), nullable=True),
+    sa.Column('timestamp', sa.DateTime(), nullable=True),
     sa.Column('img_src', sa.String(length=120), nullable=True),
-    sa.Column('total', sa.String(length=120), nullable=True),
+    sa.Column('total', sa.Float(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('img_src')
     )
     with op.batch_alter_table('recipt', schema=None) as batch_op:
-        batch_op.create_index(batch_op.f('ix_recipt_total'), ['total'], unique=True)
+        batch_op.create_index(batch_op.f('ix_recipt_timestamp'), ['timestamp'], unique=False)
 
     op.create_table('user_tag',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -65,9 +75,10 @@ def downgrade():
     op.drop_table('tag')
     op.drop_table('user_tag')
     with op.batch_alter_table('recipt', schema=None) as batch_op:
-        batch_op.drop_index(batch_op.f('ix_recipt_total'))
+        batch_op.drop_index(batch_op.f('ix_recipt_timestamp'))
 
     op.drop_table('recipt')
+    op.drop_table('invite')
     with op.batch_alter_table('user', schema=None) as batch_op:
         batch_op.drop_index(batch_op.f('ix_user_email'))
 

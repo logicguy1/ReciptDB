@@ -50,12 +50,17 @@
   background-repeat: no-repeat;
   background-size: 20px;
 
+  width: calc(100% - 80px);
   padding: 12px 40px;
   margin: 8px 0;
 
   border: 1px solid #eee;
   border-radius: 2px;
   outline: none;
+}
+
+#invite-code {
+  background-image: url('/static/img/gray/key_icon.svg') !important;
 }
 
 #card input[type=text] {

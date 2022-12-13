@@ -135,7 +135,7 @@ input[type="checkbox"]:checked {
   border-color: transparent transparent #252525 transparent;
 }
 
-/* Table style */
+/* table style */
 table {
   width: 100%;
   border-collapse: collapse;

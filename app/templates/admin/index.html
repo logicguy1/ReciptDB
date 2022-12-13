@@ -3,28 +3,52 @@
 {% block content %}
   <link rel="stylesheet" href="/static/css/admin.css">
 
-  <form action="" method="post" novalidate>
-    {{ form.hidden_tag() }}
-    {{ form.code(size=32, placeholder="Tilføj en kode", id="search") }}
-    {{ form.submit() }}
-  </form>
   <h2>Invitations koder</h2>
   <table>
     <thead>
       <tr>
         <th>Kode</th>
         <th>Status</th>
-        <th></th>
+        <th>Brugt af</th>
       </tr>
     </thead>
     <tbody>
       {% for code in codes %}
         <tr>
           <td>{{ code.code }}</td>
-          <td>{{ code.used }}</td>
-          <td><a href="{{ url_for('dashboard.delete', id=code.id) }}"><img id="trash" src="/static/img/gray/trash_2_icon.svg" alt="Delete"></a></td>
+          <td>
+            <div class="indicator-wrapper">
+              <div class="indicator" style="border-color: #{{ ('ffa900', '2ebf46', 'df2030')[code.status] }}">
+              </div>{{ ("Tilgængelig", "Brugt", "Deaktiveret")[code.status] }}
+            </div>
+          </td>
+          <td>{{ code.author.email }}</td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
+
+  <form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    {{ form.code(size=32, placeholder="Tilføj en kode", id="search") }}
+    {{ form.submit() }}
+  </form>
+
+  <form action="/admin/enable" method="post" novalidate style="display: none;">
+    {{ form2.hidden_tag() }}
+    {{ form2.code() }}
+    {{ form2.activate() }}
+    {{ form2.submit(id="submit-auto") }}
+  </form>
+
+  <div id="contextMenu" class="context-menu" style="display:none">
+    <ul>
+      <li><a onClick="toggle(true);">Deactivate</a></li>
+    </ul>
+    <ul>
+      <li><a onClick="toggle(false);">Activate</a></li>
+    </ul>
+  </div>
+
+  <script src="/static/js/admin.js"></script>
 {% endblock %}

@@ -47,8 +47,12 @@ def add():
     form = get_recipe_form(tags)
 
     if form.validate_on_submit():
-        filename = images.save(form.image.data)
-        text, file_name = process_image(filename)
+        if form.image.data:
+            filename = images.save(form.image.data)
+            text, file_name = process_image(filename)
+        else:
+            text = "Ingen bon"
+            file_name = None
 
         r = Recipt(
                 user_id=current_user.id,

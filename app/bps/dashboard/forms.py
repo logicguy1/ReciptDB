@@ -21,7 +21,10 @@ def get_recipe_form(tags: list) -> FlaskForm:
 
         def validate_image(self, image):
             if image.raw_data:
-                if image.raw_data[0].filename.endswith(".png") or image.raw_data[0].filename.endswith(".jpg"):
+                if image.raw_data[0].filename.endswith(".png") or \
+                    image.raw_data[0].filename.endswith(".jpg") or \
+                    image.raw_data[0].filename == "":
+                    
                     pass
                 else:
                     raise ValidationError("Der modtages kun .png og .jpg filer.")

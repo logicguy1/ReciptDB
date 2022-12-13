@@ -12,6 +12,7 @@ class User(UserMixin, db.Model):
     admin = db.Column(db.Integer, default=lambda: 0)
     recipts = db.relationship('Recipt', backref='author', lazy='dynamic')
     tags = db.relationship('UserTag', backref='author', lazy='dynamic')
+    code = db.relationship('Invite', backref='author', lazy='dynamic')
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -65,7 +66,12 @@ class UserTag(db.Model):
 class Invite(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     code = db.Column(db.String(100))
-    used = db.Column(db.Boolean())
+    # 0 = avaliable, 1 = taken, 2 = blocked
+    status = db.Column(db.Integer, default=0)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    
+    def __repr__(self):
+        return f"<Invite {self.code}>"
 
 @login.user_loader
 def load_user(id):

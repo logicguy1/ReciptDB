@@ -16,6 +16,12 @@
               {% endfor %}
           </p>
           <p>
+              {{ form.invite(placeholder="Invite code", id="invite-code") }}
+              {% for error in form.invite.errors %}
+              <br><span class="err">*{{ error }}</span>
+              {% endfor %}
+          </p>
+          <p>
               {{ form.password(size=32, placeholder="Password", onChange="pass_change();") }}
               {% for error in form.password.errors %}
               <br><span class="err">*{{ error }}</span>

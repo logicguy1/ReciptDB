@@ -5,7 +5,13 @@ from werkzeug.urls import url_parse
 from app import db
 from app.bps.auth import bp
 from app.bps.auth.forms import LoginForm, RegistrationForm
-from app.models import User
+from app.models import User, Invite
+
+
+@bp.before_request
+def before_request_func():
+    print("before_request executing!")
+
 
 @bp.route('/login', methods=["GET", "POST"])
 def login():
@@ -40,7 +46,13 @@ def register():
     if form.validate_on_submit():
         user = User(email=form.email.data)
         user.set_password(form.password.data)
+
         db.session.add(user)
+        db.session.commit()
+
+        invite = Invite.query.filter_by(code=form.invite.data, user_id=None).first()
+        invite.user_id = user.id
+        invite.status = 1
         db.session.commit()
 
         flash('infoCongratulations, you are now a registered user!')

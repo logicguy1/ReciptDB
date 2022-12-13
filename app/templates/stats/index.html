@@ -48,7 +48,7 @@
           <tbody>
             {% for tag, tot in tags_total.items() %}
               <tr>
-                <td>{{ tag.body }}</td>
+                <td style="border-left: 3px solid #{{ tag.color }}70; ">{{ tag.body }}</td>
                 <td>{{ round(tot, 2) }}</td>
                 <td>{{ round(tags_avg.get(tag), 2) }}</td>
               </tr>
