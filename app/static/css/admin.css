@@ -103,8 +103,6 @@ td img {
 }
 
 .context-menu ul li {
-  padding-bottom: 7px;
-  padding-top: 7px;
   border: 1px solid black;
 }
 
@@ -112,6 +110,10 @@ td img {
   text-decoration: none;
   color: black;
   cursor: pointer;
+  width: 100%;
+  padding-bottom: 7px;
+  padding-top: 7px;
+  display: block;
 }
 
 .context-menu ul li:hover {

@@ -41,6 +41,8 @@
             </div>
           {% endif %}
         {% endwith %}
+
+        {% if current_user.is_authenticated %}
         <div id="sidebar">
           <p>
             <a href="{{ url_for('dashboard.index') }}">
@@ -60,7 +62,6 @@
               Tags
             </a>
           </p>
-          {% if current_user.is_authenticated %}
             {% if current_user.is_admin() %}
             <p>
               <a href="{{ url_for('admin.index') }}">
@@ -69,8 +70,12 @@
               </a>
             </p>
             {% endif %}
-          {% endif %}
+          <div id="bottom">
+            <img src="/static/img/white/git_commit_icon.svg" alt="">
+            Alpha 0.1
+          </div>
         </div>
+        {% endif %}
         <div id="main">
           {% block content %}{% endblock %}
         </div>

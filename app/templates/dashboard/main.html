@@ -14,7 +14,7 @@
   <table>
     <thead>
       <tr>
-        <th>Tidspunkt</th>
+        <th>Dato</th>
         <th>Butik</th>
         <th>Pris</th>
         <th>Tags</th>
@@ -24,7 +24,7 @@
     <tbody>
       {% for recipt in recipts %}
         <tr onclick="open_new('{{ recipt.id }}');">
-          <td>{{ recipt.timestamp }}</td>
+          <td>{{ recipt.timestamp.strftime("%x") }}</td>
           <td>{{ recipt.store }}</td>
           <td>{{ recipt.total }}</td>
           <td>

@@ -191,6 +191,7 @@ select {
 
   align-items: center;
   width: 150px;
+  transition: all .3s ease;
 }
 
 #sidebar a:hover {
@@ -200,6 +201,16 @@ select {
 
 #sidebar * {
   color: #eee;
+}
+
+#sidebar #bottom {
+  position: absolute;
+  bottom: 10px;
+  width: 160px;
+  padding-left: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 /* Tags */

@@ -15,7 +15,7 @@ locale.setlocale(locale.LC_ALL, "C")
 
 
 def worker(img_gs, i, wordlist, images, dim):
-    print("Started working", i)
+    print("[THREAD] Starting", i)
     # Perform binary thresholding on the image with T = 125
     if i > 0:
         r, threshold = cv2.threshold(img_gs, i, 255, cv2.THRESH_BINARY)
@@ -24,13 +24,17 @@ def worker(img_gs, i, wordlist, images, dim):
         img = img_gs
 
     # Get OCR data
-    with PyTessBaseAPI(path="/usr/share/tessdata/tessdata", lang='dan') as api:
-        pil_img = Image.fromarray(img)
-        api.SetImage(pil_img)
-        text = api.GetUTF8Text()
-        confidence = api.AllWordConfidences()
-        #text = [i for i, c in zip(text.split(" "), confidence) if c > 0]
-        text = "\n".join([i for i in text.split("\n") if len(i) > 2 or i.strip() == ""])
+    try:
+        with PyTessBaseAPI(path="/usr/share/tessdata/tessdata", lang='dan') as api:
+            pil_img = Image.fromarray(img)
+            api.SetImage(pil_img)
+            text = api.GetUTF8Text()
+            confidence = api.AllWordConfidences()
+            #text = [i for i, c in zip(text.split(" "), confidence) if c > 0]
+            text = "\n".join([i for i in text.split("\n") if len(i) > 2 or i.strip() == ""])
+    except Exception as err:
+        print(f"[Thread] FAILED {err}, TERMINATING")
+        return
         
     # resize image
     resized = cv2.resize(img_gs, dim, interpolation = cv2.INTER_AREA)
@@ -45,7 +49,7 @@ def worker(img_gs, i, wordlist, images, dim):
             "text": text
         }
 
-    print("Stopping thread", i, "with a score of", score)
+    print("[THREAD] COMPLRETE", i, "with a score of", score)
 
 
 def get_running_threads(threads: list) -> int:
@@ -65,8 +69,9 @@ def process_image(file_name):
         wordlist = [i.strip().split("/")[0].lower() for i in file.readlines()]
 
     # The sentensivity of the filter
+    verylarge = list(range(0, 50, 20)) + list(range(50, 150, 10)) + list(range(150, 255, 50))
     large = [0, 50, 80, 100, 120, 140, 160]
-    large = list(range(0, 50, 20)) + list(range(50, 150, 10)) + list(range(150, 255, 50))
+    medium = list(range(50, 150, 15)) + [200]
     small = [100,]
 
     # Read image as grayscale
@@ -91,11 +96,12 @@ def process_image(file_name):
     print("- Shape/Dimensions: " + str(img_gs.shape))
 
     threads = []
-    for i in large:
+    for i in medium:
         thread = threading.Thread(target=worker, args=(img_enhanced, i, wordlist, images, dim))
         thread.start()
         threads.append(thread)
-        while get_running_threads(threads) > 2:
+        # For better preformance increase this num, it takes more memory!
+        while get_running_threads(threads) > 1:
             time.sleep(.2)
 
     # Make sure all the threads are done
