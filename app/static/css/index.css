@@ -81,7 +81,7 @@ input[type=text]:focus {
   border: 1px solid #ccc;
 }
 
-
+/*
 .custom-file-input {
   color: transparent;
 }
@@ -113,4 +113,4 @@ input[type=text]:focus {
 .custom-file-input:active::before {
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
 }
-
+*/
