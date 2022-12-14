@@ -36,6 +36,7 @@ class Recipt(db.Model):
     img_src = db.Column(db.String(120), unique=True)
     total = db.Column(db.Float())
     tags = db.relationship('Tag', backref='recipt', lazy='dynamic')
+    share = db.relationship('Share', backref='recipt', lazy='dynamic')
 
     def get_tags(self):
         tags = self.tags.all()
@@ -69,9 +70,20 @@ class Invite(db.Model):
     # 0 = avaliable, 1 = taken, 2 = blocked
     status = db.Column(db.Integer, default=0)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     
     def __repr__(self):
         return f"<Invite {self.code}>"
+
+
+class Share(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    code = db.Column(db.String(100))
+    recipt_id = db.Column(db.Integer, db.ForeignKey('recipt.id'))
+
+    def __repr__(self):
+        return f"<Share {self.code}>"
+
 
 @login.user_loader
 def load_user(id):

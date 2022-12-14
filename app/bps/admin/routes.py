@@ -32,7 +32,7 @@ def index():
 
     form.code.data = uuid.uuid4()
     form2 = SetInviteForm()
-    return render_template("admin/index.html", form=form, form2=form2, codes=invites)
+    return render_template("admin/index.html", title="Admin", form=form, form2=form2, codes=invites, none=None)
 
 
 @bp.route('/enable', methods=["POST"])

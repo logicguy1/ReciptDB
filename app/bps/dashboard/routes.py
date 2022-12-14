@@ -11,7 +11,7 @@ from app import app, db
 from app.bps.dashboard import bp
 from app.bps.dashboard.forms import get_recipe_form, get_edit_form, SearchForm
 from app.models import User, UserTag, Recipt, Tag
-from app.cv2_model import process_image
+from app.cv_models.cv2_model import process_image
 
 
 images = UploadSet('images', IMAGES)
@@ -36,7 +36,7 @@ def index():
     else:
         r = current_user.recipts.order_by(Recipt.timestamp.desc()).all()
 
-    return render_template("dashboard/main.html", recipts=r, form=form)
+    return render_template("dashboard/main.html", title="Bonner", recipts=r, form=form)
 
 
 @bp.route('/create', methods=["GET", "POST"])
@@ -74,7 +74,7 @@ def add():
 
         return redirect(url_for("dashboard.index"))
 
-    return render_template("dashboard/new.html", form=form)
+    return render_template("dashboard/new.html", title="Upload", form=form)
 
 
 @bp.route('/view', methods=["GET", "POST"])
@@ -90,6 +90,7 @@ def view():
 
     r = Recipt.query.filter_by(id=recipt_id, user_id=current_user.id).first_or_404()
 
+    # If the user prompts to add a tag
     if new_tag is not None:
         t = current_user.tags.filter_by(id=new_tag).first_or_404()
         tag = Tag(recipt_id=r.id, user_tag_id=t.id)
@@ -97,6 +98,7 @@ def view():
         db.session.commit()
         return redirect(url_for("dashboard.view", id=r.id))
 
+    # If the user prompts to remove a tag
     if rem_tag is not None:
         t = r.tags.filter_by(id=rem_tag).delete()
         db.session.commit()
@@ -115,7 +117,7 @@ def view():
         return redirect(url_for("dashboard.index"))
 
     all_tags = [i for i in current_user.tags.all() if i not in tags]
-    return render_template("dashboard/view.html", recipt=r, form=form, tags=list(zip(tags, r.tags.all())), all_tags=all_tags)
+    return render_template("dashboard/view.html", title="Viser bon", recipt=r, form=form, tags=list(zip(tags, r.tags.all())), all_tags=all_tags)
 
 
 @bp.route('/img')
@@ -152,3 +154,8 @@ def delete():
     db.session.commit()
 
     return redirect(url_for("dashboard.index"))
+
+
+@bp.route('/share/<share_id>')
+def share(share_id):
+    return share_id

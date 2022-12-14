@@ -50,7 +50,7 @@ input[type=text] {
   background-position: 10px 10px;
   background-repeat: no-repeat;
   background-size: 20px;
-  width: calc(100% - 161px);
+  width: calc(100% - 39px);
   padding: 12px 18px;
 
   margin: 8px 0;
@@ -63,10 +63,15 @@ input[type=text] {
 #search {
   background-image: url('/static/img/gray/search_icon.svg');
   padding: 12px 40px;
+  width: calc(100% - 161px);
 }
 
 input[type=text]:focus {
   border: 1px solid #ccc;
+}
+
+input[type=file] {
+  padding: 12px 0;
 }
 
 #submit {

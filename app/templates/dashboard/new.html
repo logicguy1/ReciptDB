@@ -6,7 +6,8 @@
   <form action="" method="post" novalidate enctype="multipart/form-data">
     {{ form.hidden_tag() }}
     <p>
-      {{ form.store(size=32, placeholder="Store Name") }}
+      {{ form.store.label }}<br>
+      {{ form.store(size=32, placeholder="Navn på butikken") }}
       {% for error in form.store.errors %}
       <br><span class="err">*{{ error }}</span>
       {% endfor %}

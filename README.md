@@ -1,6 +1,17 @@
 # ReciptDB
 Your personal recipt database and management software
 
+
+
+## Roadmap
+
+- [ ] Share button to share a recipt without having to login
+  - [ ] Main system
+  - [ ] Comments
+- [ ] Edit tags
+- [ ] Minimise icons
+
+
 ## Installation
 
 Download CV2 training data
@@ -14,10 +25,10 @@ Install requred software
 ```sh
 $ sudo apt-get -y update
 $ sudo apt-get -y install python3 python3-venv python3-dev
-$ sudo apt-get -y install postfix nginx git
+$ sudo apt-get -y install postfix nginx git tesseract-ocr
 ```
 
-### Python VENV
+### Python venv
 The virtualenvirunniment
 ```sh
 $ python3.9 -m venv venv
@@ -88,7 +99,7 @@ server {
 
 ```
 
-Reload NGRIX server
+Reload NGINX server
 ```sh
 service nginx reload
 ```

@@ -8,11 +8,6 @@ from app.bps.auth.forms import LoginForm, RegistrationForm
 from app.models import User, Invite
 
 
-@bp.before_request
-def before_request_func():
-    print("before_request executing!")
-
-
 @bp.route('/login', methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:

@@ -6,6 +6,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager, current_user, login_user, logout_user, login_required
 
+import datetime
+
 app = Flask(__name__)
 app.config.from_object(Config)
 
@@ -19,8 +21,11 @@ login.login_view = 'auth.login'
 @app.before_request
 def before_request_func():
     if request.endpoint != "static" and not current_user.is_anonymous:
-        if current_user.code.first().status != 1:
+        code = current_user.code.first()
+        if code.status != 1:
             logout_user()
+        else:
+            code.timestamp = datetime.datetime.utcnow()
 
 
 from app.bps.auth import bp as auth_bp

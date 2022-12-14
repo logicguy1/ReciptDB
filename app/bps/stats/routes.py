@@ -115,6 +115,7 @@ def index():
 
     return render_template(
             "stats/index.html", 
+            title="Statestik",
             form=form, 
             total=totals, 
             tags_total=tags_total,

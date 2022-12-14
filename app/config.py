@@ -3,10 +3,11 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
-    UPLOADED_IMAGES_DEST = os.environ.get('UPLOADED_IMAGES_DEST') or 'app/assets/recipts'
-    TIME_STR = "%Y-%m-%d %X.%f"
+    UPLOADED_IMAGES_DEST = os.environ.get('UPLOADED_IMAGES_DEST') or 'app/assets/uploads'
+    TIME_STR = "%Y-%m-%d %X"
     WORDLIST = "wordlistDK.txt"
     DEBUG = False
+    VERSION = "0.1"
 
     # Wheater or not to use multi threading when handeling images
     QUICK_MODE = False 

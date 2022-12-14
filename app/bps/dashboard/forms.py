@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, FileField, SelectField, TextAreaField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, regexp
 from app.models import User
+from app import app
 
 import re
 
@@ -51,7 +52,7 @@ def get_edit_form(recipt):
             except:
                 raise ValidationError("Dit total skal være et komma eller heltal")
 
-    setattr(EditRecipeForm, "timestamp", StringField("Timestamp", validators=[DataRequired()], default=recipt.timestamp))
+    setattr(EditRecipeForm, "timestamp", StringField("Timestamp", validators=[DataRequired()], default=recipt.timestamp.strftime(app.config.get("TIME_STR"))))
     setattr(EditRecipeForm, "body", TextAreaField("Body", validators=[DataRequired()], default=recipt.body))
     setattr(EditRecipeForm, "total", StringField("Total", validators=[DataRequired()], default=recipt.total))
 

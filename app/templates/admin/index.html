@@ -10,6 +10,7 @@
         <th>Kode</th>
         <th>Status</th>
         <th>Brugt af</th>
+        <th>Sidst set</th>
       </tr>
     </thead>
     <tbody>
@@ -23,6 +24,7 @@
             </div>
           </td>
           <td>{{ code.author.email }}</td>
+          <td>{{ code.timestamp.strftime("%x %X") if code.timestamp is not none else "" }}</td>
         </tr>
       {% endfor %}
     </tbody>

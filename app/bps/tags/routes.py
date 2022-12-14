@@ -11,6 +11,7 @@ from app.bps.tags.forms import NewTagForm
 from app.models import User, UserTag, Recipt, Tag
 # from app.cv2_model import process_image
 
+
 @bp.route('/', methods=["GET", "POST"])
 @login_required
 def index():
@@ -25,7 +26,7 @@ def index():
     uses = [sum([1 if tag.id in map(lambda x: x.user_tag_id, r.tags) else 0 
                 for r in current_user.recipts.all()])
             for tag in tags]
-    return render_template("tags/tags.html", tags=zip(tags, uses))
+    return render_template("tags/tags.html", title="Tags", tags=zip(tags, uses))
 
 
 @bp.route('/create', methods=["GET", "POST"])
@@ -39,4 +40,4 @@ def create():
         db.session.commit()
         return redirect(url_for("tags.index"))
 
-    return render_template("tags/new.html", form=form)
+    return render_template("tags/new.html", title="Lav nyt tag", form=form)

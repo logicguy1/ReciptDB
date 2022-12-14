@@ -10,7 +10,6 @@ h2, h3 {
 #tag-card-wrapper {
   display: flex; 
   flex-wrap: wrap;
-  justify-content: space-between;
   gap: 35px;
 }
 
@@ -62,6 +61,14 @@ h2, h3 {
 
 #color-inp {
   width: 200px;
+
+  background-position: 7px 10px;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  padding: 12px 12px;
+  padding-left: 32px;
+
+  background-image: url('/static/img/gray/hash_icon.svg');
 }
 
 #color-inp-wrapper {
