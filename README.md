@@ -5,11 +5,14 @@ Your personal recipt database and management software
 
 ## Roadmap
 
+- [ ] Fix design for mobile
 - [ ] Share button to share a recipt without having to login
-  - [ ] Main system
+  - [x] Core system
   - [ ] Comments
 - [ ] Edit tags
-- [ ] Minimise icons
+- [ ] Minimise sidebar
+- [ ] Statistics for model, usefull for optimisations
+- [ ] Error menu
 
 
 ## Installation

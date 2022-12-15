@@ -1,5 +1,16 @@
 {% extends "base.html" %}
 
+{% block popup %}
+<h3>Ændre adgangskode</h3>
+<form action="changepass" method="post" novalidate>
+  {{ popup_form.hidden_tag() }}
+  {{ popup_form.acc() }}
+  {{ popup_form.password(placeholder="Ny adgangskode") }}
+  <br>
+  {{ popup_form.submit() }}
+</form>
+{% endblock %}
+
 {% block content %}
   <link rel="stylesheet" href="/static/css/admin.css">
 
@@ -43,12 +54,18 @@
     {{ form2.submit(id="submit-auto") }}
   </form>
 
+  <form action="/admin/delete" method="post" novalidate style="display: none;">
+    {{ form3.hidden_tag() }}
+    {{ form3.code_del() }}
+    {{ form3.submit(id="submit-auto2") }}
+  </form>
+
   <div id="contextMenu" class="context-menu" style="display:none">
     <ul>
-      <li><a onClick="toggle(true);">Deactivate</a></li>
-    </ul>
-    <ul>
-      <li><a onClick="toggle(false);">Activate</a></li>
+      <li><a onClick="toggle(true);">Aktiver</a></li>
+      <li><a onClick="toggle(false);">Deaktiver</a></li>
+      <li><a onClick="change_pass();open_popup();">Ændre Adgangskode</a></li>
+      <li><a onClick="delete_row();">Slet</a></li>
     </ul>
   </div>
 

@@ -10,7 +10,7 @@ import os
 from app import app, db
 from app.bps.dashboard import bp
 from app.bps.dashboard.forms import get_recipe_form, get_edit_form, SearchForm
-from app.models import User, UserTag, Recipt, Tag
+from app.models import User, UserTag, Recipt, Tag, Share
 from app.cv_models.cv2_model import process_image
 
 
@@ -116,23 +116,42 @@ def view():
 
         return redirect(url_for("dashboard.index"))
 
+    link = url_for("dashboard.share", share_id=r.get_share_link())
+    print(link)
     all_tags = [i for i in current_user.tags.all() if i not in tags]
-    return render_template("dashboard/view.html", title="Viser bon", recipt=r, form=form, tags=list(zip(tags, r.tags.all())), all_tags=all_tags)
+    return render_template(
+            "dashboard/view.html", 
+            title="Viser bon", 
+            recipt=r, 
+            form=form, 
+            tags=list(zip(tags, r.tags.all())), 
+            all_tags=all_tags,
+            link=link,
+        )
 
 
 @bp.route('/img')
-@login_required
 def img():
     args = request.args
     recipt_id = args.get("id")
-    cool = args.get("cool")
+    code = args.get("share")
     
     if recipt_id is None:
         return abort(404)
 
-    file_name = Recipt.query.filter_by(id=recipt_id, user_id=current_user.id).first_or_404().img_src
+    # If the user is logged in just make the normal query
+    if current_user.is_authenticated:
+        file_name = Recipt.query.filter_by(id=recipt_id, user_id=current_user.id).first_or_404().img_src
+        return send_file("assets/recipts/" + file_name, mimetype='image/gif')
+    else:
+        r = Recipt.query.filter_by(id=recipt_id).first_or_404()
+        s = r.share.first_or_404().code
+        if code == s:
+            file_name = r.img_src
+            return send_file("assets/recipts/" + file_name, mimetype='image/gif')
+    
+    abort(404)
 
-    return send_file("assets/recipts/" + ("masked_" if cool == "1" else "") + file_name, mimetype='image/gif')
 
 
 @bp.route('/delete')
@@ -158,4 +177,9 @@ def delete():
 
 @bp.route('/share/<share_id>')
 def share(share_id):
-    return share_id
+    share = Share.query.filter_by(code=share_id).first_or_404()
+    return render_template(
+            "dashboard/share.html",
+            title="Bon",
+            share=share,
+            )

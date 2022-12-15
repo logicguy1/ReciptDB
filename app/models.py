@@ -2,6 +2,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from app import db, login
 from datetime import datetime
+import uuid
+import os
 
 from flask_login import UserMixin
 
@@ -10,6 +12,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     admin = db.Column(db.Integer, default=lambda: 0)
+
     recipts = db.relationship('Recipt', backref='author', lazy='dynamic')
     tags = db.relationship('UserTag', backref='author', lazy='dynamic')
     code = db.relationship('Invite', backref='author', lazy='dynamic')
@@ -22,6 +25,22 @@ class User(UserMixin, db.Model):
 
     def is_admin(self):
         return self.admin == 1
+
+    def deep_delete(self):
+        recipts = self.recipts
+
+        for r in recipts:
+            r.tags.delete()
+
+            if r.img_src is not None:
+                try:
+                    os.remove(f'app/assets/recipts/{r.img_src}') 
+                except FileNotFoundError:
+                    pass
+
+        self.tags.delete()
+        recipts.delete()
+            
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -45,6 +64,19 @@ class Recipt(db.Model):
 
     def get_month(self):
         return self.timestamp.strftime("%Y-%m")
+
+    def get_share_link(self):
+        share = self.share.first()
+        if share is not None:
+            return share.code
+
+        # If the user has no codes create a new one from a hex encoded UUID4
+        lnk = uuid.uuid4().hex
+        share = Share(code=lnk, recipt_id=self.id)
+        db.session.add(share)
+        db.session.commit()
+
+        return lnk
 
     def __repr__(self):
         return f'<Recipt {self.id}>'

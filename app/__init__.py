@@ -40,6 +40,9 @@ app.register_blueprint(api_bp, url_prefix="/api")
 from app.bps.dashboard import bp as dash_bp
 app.register_blueprint(dash_bp)
 
+from app.bps.settings import bp as settings_bp
+app.register_blueprint(settings_bp, url_prefix="/settings")
+
 from app.bps.stats import bp as stats_bp
 app.register_blueprint(stats_bp, url_prefix="/stats")
 
