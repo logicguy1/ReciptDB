@@ -1,5 +1,13 @@
 {% extends "base.html" %}
 
+{% block meta %}
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@elon">
+    <meta name="twitter:title" content="{{ share.recipt.store }}">
+    <meta name="twitter:description" content="{{ share.recipt.body }}">
+    <meta name="twitter:image" content="{{ url_for('dashboard.img', id=share.recipt.id, share=share.code) }}">
+{% endblock %}
+
 {% block content %}
   <link rel="stylesheet" href="/static/css/view.css">
   <div class="header"></div>
