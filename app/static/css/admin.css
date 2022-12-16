@@ -140,3 +140,99 @@ td img {
 #popup-form input[type=submit] {
   width: 100%;
 }
+
+/* Card css */
+#info-row, #card-wraper {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+#info-row {
+  justify-content: space-between;
+/*  flex: 1;
+  min-width: 820px; */
+}
+
+#card-wraper {
+  margin-bottom: 20px;
+}
+
+#info-row .card {
+  position: relative;
+  width: 200px;
+  height: 220px;
+  padding: 30px;
+  padding-top: 105px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+  overflow: hidden;
+	background-clip: padding-box;
+}
+
+#info-row .card h3 {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+
+  background-color: #be3af6;
+  color: #fff;
+  font-weight: bold;
+}
+
+#info-row .card h1 {
+  padding-top: 15px;
+  text-align: center;
+}
+
+#info-row .card .lower-title {
+  padding-top: 10px;
+  text-align: center;
+  color: #aaa;
+}
+
+#info-row .card .lower-body {
+  padding-top: 2px;
+  text-align: center;
+  color: #252525;
+}
+
+#info-row .card .process {
+  overflow: hidden;
+  background-clip: padding-box;
+  display: block;
+  width: 100%;
+  height: 10px;
+  border-radius: 20px;
+  background-color: #eee;
+}
+
+#info-row .card .process div {
+  background-color: #be3af6;
+  height: 100%;
+  width: 0;
+}
+
+.card-wide {
+  position: relative;
+  min-width: 200px;
+  height: 295px;
+  flex: 1;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+  overflow: hidden;
+	background-clip: padding-box;
+}
+
+.card-wide p {
+  margin-top: 5px;
+}

@@ -76,3 +76,44 @@ function delete_row(){
   document.getElementById("code_del").value = code;
   document.getElementById('submit-auto2').click();
 }
+
+function get_sysinf(){
+  fetch('/api/get_stats')
+  .then(response => response.json())
+  .then((data) => {
+    console.log(data);
+
+    // Configure system info
+    var sysinf = data.sysinf;
+    document.getElementById("process-cpu").style.width = `${sysinf.cpu.cpu_usage}%`;
+    document.getElementById("proc-cpu").innerHTML = `${sysinf.cpu.cpu_usage}%`;
+
+    elm = document.getElementById("used-cpu")
+    elm.innerHTML = ""
+    for (let i = 0; i < sysinf.cpu.top.length; i++){
+      elm.innerHTML += sysinf.cpu.top[i] + "<br>"
+    }
+
+    document.getElementById("process-mem").style.width = `${sysinf.memory.percent_used}%`;
+    document.getElementById("proc-mem").innerHTML = `${sysinf.memory.percent_used}%`;
+    document.getElementById("used-mem").innerHTML = `${sysinf.memory.used}GB`;
+    document.getElementById("left-mem").innerHTML = `${sysinf.memory.total}GB`;
+
+    document.getElementById("process-hdd").style.width = `${sysinf.disk_space.percent_used}%`;
+    document.getElementById("proc-hdd").innerHTML = `${sysinf.disk_space.percent_used}%`;
+    document.getElementById("used-hdd").innerHTML = `${sysinf.disk_space.used}GB`;
+    document.getElementById("left-hdd").innerHTML = `${sysinf.disk_space.total}GB`;
+
+    document.getElementById("os").innerHTML = sysinf.os;
+    document.getElementById("uptime").innerHTML = sysinf.uptime;
+    document.getElementById("host").innerHTML = sysinf.hostname;
+    document.getElementById("ip").innerHTML = sysinf.ip;
+    document.getElementById("mysql").innerHTML = sysinf.mysql;
+    document.getElementById("nginx").innerHTML = sysinf.nginx;
+
+  });
+
+  // setTimeout(get_sysinf, 10000);
+}
+
+get_sysinf();

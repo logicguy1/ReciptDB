@@ -5,6 +5,8 @@ from werkzeug.urls import url_parse
 
 from sqlalchemy import and_, or_, not_
 from datetime import datetime
+import subprocess
+import psutil
 import os
 import uuid
 
@@ -28,15 +30,12 @@ def index():
         flash("infoTilføjet ny invitations kode")
         return redirect(url_for("admin.index"))
 
-    pass_form = ChangePasswordForm()
-    if pass_form.validate_on_submit():
-        print(pass_form.password.data)
-
     invites = Invite.query.order_by(Invite.status.desc()).all()
 
     form.code.data = uuid.uuid4()
     form2 = SetInviteForm()
     form3 = DeleteUserForm()
+    pass_form = ChangePasswordForm()
     return render_template(
             "admin/index.html", 
             title="Admin", 

@@ -14,6 +14,45 @@
 {% block content %}
   <link rel="stylesheet" href="/static/css/admin.css">
 
+  <div id="card-wraper">
+    <div class="card-wide">
+      <h3>Server information</h3>
+      <p>Os: <span id="os"></span></p>
+      <p>Hostname: <span id="host"></span></p>
+      <p>Running IP: <span id="ip"></span></p>
+      <p>Uptime: <span id="uptime"></span></p>
+      <p>MySQL version: <span id="mysql"></span></p>
+      <p>NGINX version: <span id="nginx"></span></p>
+    </div>
+    <div id="info-row">
+      <div class="card">
+        <h3>Processor</h3>
+        <div class="process"><div id="process-cpu"></div></div>
+        <h1 id="proc-cpu">N/A</h1>
+        <p class="lower-title">Top processes</p>
+        <p class="lower-body" id="used-cpu"></p>
+      </div>
+      <div class="card">
+        <h3>Hukommelse</h3>
+        <div class="process"><div id="process-mem"></div></div>
+        <h1 id="proc-mem">N/A</h1>
+        <p class="lower-title">Currently used</p>
+        <p class="lower-body" id="used-mem"></p>
+        <p class="lower-title">Avaliable</p>
+        <p class="lower-body" id="left-mem"></p>
+      </div>
+      <div class="card">
+        <h3>Læringsplads</h3>
+        <div class="process"><div id="process-hdd"></div></div>
+        <h1 id="proc-hdd">N/A</h1>
+        <p class="lower-title">Currently used</p>
+        <p class="lower-body" id="used-hdd"></p>
+        <p class="lower-title">Avaliable</p>
+        <p class="lower-body" id="left-hdd"></p>
+      </div>
+    </div>
+  </div>
+
   <h2>Invitations koder</h2>
   <table>
     <thead>
