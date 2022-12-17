@@ -8,6 +8,7 @@ class Config(object):
     WORDLIST = "wordlistDK.txt"
     DEBUG = False
     VERSION = "0.1"
+    NGINX_LOGS = os.environ.get("NGINX_LOGS") or '_tests/access.log'
 
     # Wheater or not to use multi threading when handeling images
     QUICK_MODE = False 

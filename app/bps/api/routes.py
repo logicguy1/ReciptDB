@@ -15,7 +15,7 @@ import os
 import subprocess
 import psutil
 
-from app import db
+from app import app, db
 from app.bps.api import bp
 from app.models import User, UserTag, Recipt, Tag
 
@@ -73,7 +73,7 @@ def get_sysinfo():
 
     # Get NGINX version
     try:
-        sysinf["nginx"] = subprocess.run(["nginx", "-v"], capture_output=True).stdout.decode().split()[2]
+        sysinf["nginx"] = subprocess.run(["nginx", "-v"], capture_output=True).stdout.decode().split()
     except FileNotFoundError:
         sysinf["nginx"] = "Not available"
 
@@ -139,7 +139,7 @@ def get_entries():
 
     # Open the log file
     log_entries = []
-    with open('tests/access.log', 'r') as log_file:
+    with open(app.config["NGINX_LOGS"], 'r') as log_file:
         # Iterate over each line in the log file
         for line in log_file:
             # Try to match the line against the regular expression
