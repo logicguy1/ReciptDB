@@ -113,7 +113,7 @@ function get_sysinf(){
 
   });
 
-  // setTimeout(get_sysinf, 10000);
+  setTimeout(get_sysinf, 10000);
 }
 
 get_sysinf();

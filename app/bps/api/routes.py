@@ -73,8 +73,8 @@ def get_sysinfo():
 
     # Get NGINX version
     try:
-        sysinf["nginx"] = subprocess.run(["nginx", "-v"], capture_output=True).stdout.decode().split()
-    except FileNotFoundError:
+        sysinf["nginx"] = subprocess.run(["nginx", "-v"], capture_output=True).stderr.decode().split()[2]
+    except (FileNotFoundError, IndexError):
         sysinf["nginx"] = "Not available"
 
     # Get CPU usage
@@ -153,7 +153,7 @@ def get_entries():
 
 
 def get_traffic(logs):
-    data = {i+1: 0 for i in range(24)} 
+    data = {i: 0 for i in range(24)} 
 
     for i in logs:
         timestamp = i["time_local"] 
