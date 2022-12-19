@@ -29,6 +29,7 @@ Install requred software
 $ sudo apt-get -y update
 $ sudo apt-get -y install python3 python3-venv python3-dev
 $ sudo apt-get -y install postfix nginx git tesseract-ocr
+$ sudo apt-get -y install libmysqlclient-dev
 ```
 
 ### Python venv
@@ -38,13 +39,6 @@ $ python3.9 -m venv venv
 $ source venv/bin/activate
 (venv) $ python3.9 -m pip install -r requirements.txt
 ```
-
-Create `.env` file
-```sh
-SECRET_KEY=<app secret key>
-SQLALCHEMY_DATABASE_URI=sqlite:///home/ubuntu/ReciptDB/app/app.db
-```
-
 
 ### NGRIX
 Create self signed certs

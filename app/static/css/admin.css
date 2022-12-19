@@ -160,7 +160,8 @@ td img {
 
 #info-row .card {
   position: relative;
-  width: 200px;
+  flex: 1;
+  min-width: 200px;
   height: 220px;
   padding: 30px;
   padding-top: 105px;
